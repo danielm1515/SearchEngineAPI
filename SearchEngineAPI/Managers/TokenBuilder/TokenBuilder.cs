@@ -40,7 +40,7 @@ namespace SearchEngineAPI.Managers.TokenBuilder
             var authToken = new AuthToken();
             authToken.Token = new JwtSecurityTokenHandler().WriteToken(token);
             authToken.ExpirationDate = expirationDate;
-
+            authToken.Email = user.Email;
 
             return authToken;
 

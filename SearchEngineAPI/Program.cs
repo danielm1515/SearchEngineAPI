@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -50,6 +51,7 @@ builder.Services.AddCors(options =>
                       {
                           policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod().WithOrigins(
                               "http://localhost:4200",
+                              "http://localhost:4200/lobby",
                                "https://localhost:4200");
                       });
 });
@@ -67,6 +69,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Use((context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+    return next.Invoke();
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -76,5 +84,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors(MyAllowSpecificOrigins);
+
+
 
 app.Run();

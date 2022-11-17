@@ -6,6 +6,7 @@ namespace SearchEngineAPI.Managers.Favorite
     {
         public Task<List<Models.Favorite>> GetFavorites(Guid userId);
         public Task<bool> RemoveFavorite(Guid favoriteId, Guid userId);
+        public Task<bool> RemoveFavorite(long gitHubId, Guid userId);
         public Task<bool> AddFavorite(SearchResult searchResult,Guid userId);
     }
 }

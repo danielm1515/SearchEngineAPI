@@ -42,5 +42,11 @@ namespace SearchEngineAPI.Managers.Favorite
             bool result = await _favoriteRepository.RemoveFavorite(favoriteId, userId);
             return result;
         }
+
+        public async Task<bool> RemoveFavorite(long gitHubId, Guid userId)
+        {
+            bool result = await _favoriteRepository.RemoveFavorite(gitHubId, userId);
+            return result;
+        }
     }
 }

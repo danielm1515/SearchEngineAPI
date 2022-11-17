@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SearchEngineAPI.Managers.Favorite;
@@ -7,6 +8,7 @@ using SearchEngineAPI.Models.SearchResult;
 
 namespace SearchEngineAPI.Controllers
 {
+   
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -39,6 +41,18 @@ namespace SearchEngineAPI.Controllers
 
             return Ok(results);
         }
+
+
+        [HttpDelete("RemoveFavoriteByGitHubId/{gitHubId}")]
+        public async Task<IActionResult> RemoveFavoriteByGitHubId(long gitHubId)
+        {
+            var principal = await _tokenBuilder.GetUserByJWT(this.HttpContext);
+            var userId = Guid.Parse(principal?.FindFirst("UserId")?.Value);
+            var results = await _favoriteManager.RemoveFavorite(gitHubId, userId);
+
+            return Ok(results);
+        }
+
 
         [HttpPost("AddFavorite")]
         public async Task<IActionResult> AddFavorite(SearchResult searchResult)

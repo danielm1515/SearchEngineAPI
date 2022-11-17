@@ -4,6 +4,6 @@ namespace SearchEngineAPI.Managers
 {
     public interface IGitHubSearchEngineManager
     {
-        public Task<List<SearchResult>> Search(string value);
+        public Task<List<SearchResult>> Search(string value, Guid userId);
     }
 }

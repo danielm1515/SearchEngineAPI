@@ -43,5 +43,18 @@ namespace SearchEngineAPI.Repositories.Favorite
 
             return true;
         }
+
+        public async Task<bool> RemoveFavorite(long gitHubId, Guid userId)
+        {
+            var favorite = _searchEngineContext.Favorite.Where(w => w.GitHubId == gitHubId && w.UserId == userId).FirstOrDefault();
+
+            if (favorite == null)
+                throw new Exception("Favorite is not exist");
+
+            _searchEngineContext.Favorite.Remove(favorite);
+            _searchEngineContext.SaveChanges();
+
+            return true;
+        }
     }
 }
