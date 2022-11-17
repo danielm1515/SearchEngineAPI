@@ -19,8 +19,8 @@ namespace SearchEngineAPI.DBContext
            new
            {
                UserId = Guid.Parse("570AE72A-F266-4D4B-A207-366CF4D98A16"),
-               Email = "danielmamre@gmail.com",
-               Password = "dm1234dm",
+               Email = "YourEmail@Domain",
+               Password = "YourPassword",
 
            });
 
