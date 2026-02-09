@@ -16,7 +16,6 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddDbContext<SearchEngineContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("SearchEngineContext")));
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,7 +23,6 @@ builder.Services.AddSwaggerGen();
 
 //DI
 ManagersServiceCollection managersOwner = new ManagersServiceCollection(builder.Services);
-
 
 builder.Services.AddAuthentication(auth => {
     auth.DefaultAuthenticateScheme = "search_auth_scheme";
@@ -43,7 +41,6 @@ builder.Services.AddAuthentication(auth => {
 
 });
 
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -55,10 +52,6 @@ builder.Services.AddCors(options =>
                                "https://localhost:4200");
                       });
 });
-
-
-
-
 
 var app = builder.Build();
 
@@ -76,15 +69,8 @@ app.Use((context, next) =>
 });
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.UseCors(MyAllowSpecificOrigins);
-
-
-
 app.Run();
