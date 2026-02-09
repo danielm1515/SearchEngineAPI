@@ -40,7 +40,6 @@ builder.Services.AddAuthentication(auth => {
     };
 
 });
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -55,7 +54,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTPs request pipeline. -- by AI
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
