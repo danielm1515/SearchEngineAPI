@@ -55,11 +55,8 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTPs request pipeline. -- by AI
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Use((context, next) =>
 {
